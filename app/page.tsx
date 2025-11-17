@@ -1,4 +1,5 @@
 import { ContactForm } from "@/components/contact-form"
+import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowRight, Users } from "lucide-react"
@@ -7,17 +8,7 @@ import { ServiceCards } from "@/components/service-cards"
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="border-b border-gray-100/50 backdrop-blur-sm bg-white/80 sticky top-0 z-50">
-        <div className="container mx-auto px-6 py-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl font-medium text-black font-serif">To Skomplikowane</h1>
-            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-black">
-              Kontakt
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="py-32 lg:py-48">
@@ -84,7 +75,7 @@ export default function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-32 bg-black text-white">
+      <section id="contact" className="py-32 bg-black text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
@@ -102,7 +93,7 @@ export default function HomePage() {
       <footer className="py-12 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center text-gray-600 font-sans">
-            <p>&copy; 2025 To Skomplikowane. Wszystkie prawa zastrzeżone.</p>
+            <p>&copy; {new Date().getFullYear()} To Skomplikowane. Wszystkie prawa zastrzeżone.</p>
           </div>
         </div>
       </footer>

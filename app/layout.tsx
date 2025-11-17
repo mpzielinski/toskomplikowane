@@ -4,6 +4,7 @@ import { EB_Garamond } from "next/font/google"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
+import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
 
 const ebGaramond = EB_Garamond({
@@ -15,7 +16,6 @@ const ebGaramond = EB_Garamond({
 export const metadata: Metadata = {
   title: "To Skomplikowane",
   description: "AI agents dla małych biznesów",
-  generator: "v0.app",
   icons: {
     icon: "/icon.svg",
   },
@@ -30,6 +30,7 @@ export default function RootLayout({
     <html lang="pl" className={`${GeistSans.variable} ${ebGaramond.variable} ${GeistMono.variable}`}>
       <body>
         {children}
+        <Toaster />
         <Analytics />
       </body>
     </html>

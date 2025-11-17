@@ -194,7 +194,7 @@ export function ChatbotModal({ isOpen, onClose, title, initialMessage }: Chatbot
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Zadaj pytanie o tę usługę..."
-                onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
                 aria-label="Wpisz swoją wiadomość"
                 className="flex-1 border-gray-200 focus:border-yellow-500 focus:ring-yellow-500"
               />
