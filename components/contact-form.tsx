@@ -17,7 +17,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Send } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
 
 // Zod schema for form validation
 const formSchema = z.object({
@@ -36,7 +35,6 @@ interface FormStatus {
 
 export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>({ type: "idle" })
-  const { toast } = useToast()
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -48,53 +46,10 @@ export function ContactForm() {
     },
   })
 
-  const onSubmit = async (data: FormData) => {
-    setStatus({ type: "loading" })
-
-    try {
-      // Get n8n webhook URL from environment variable
-      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL
-
-      if (!webhookUrl) {
-        console.error("N8N webhook URL not configured")
-        setStatus({ type: "error", message: "Konfiguracja formularza jest nieprawidłowa" })
-        toast({
-          variant: "destructive",
-          title: "Błąd",
-          description: "Nie można wysłać wiadomości. Skontaktuj się bezpośrednio.",
-        })
-        return
-      }
-
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-
-      if (!response.ok) {
-        throw new Error("Failed to submit form")
-      }
-
-      setStatus({ type: "success", message: "Dziękujemy! Wkrótce się skontaktujemy." })
-      toast({
-        title: "Wiadomość wysłana!",
-        description: "Dziękujemy za kontakt. Odpowiemy tak szybko, jak to możliwe.",
-      })
-
-      form.reset()
-      setTimeout(() => setStatus({ type: "idle" }), 3000)
-    } catch (error) {
-      console.error("Form submission error:", error)
-      setStatus({ type: "error", message: "Coś poszło nie tak. Spróbuj ponownie." })
-      toast({
-        variant: "destructive",
-        title: "Błąd wysyłania",
-        description: "Nie udało się wysłać wiadomości. Spróbuj ponownie za chwilę.",
-      })
-    }
+  const onSubmit = (data: FormData) => {
+    const subject = encodeURIComponent(`Kontakt od ${data.name}${data.company ? ` (${data.company})` : ""}`)
+    const body = encodeURIComponent(data.message)
+    window.location.href = `mailto:kontakt@toskomplikowane.com?subject=${subject}&body=${body}`
   }
 
   return (

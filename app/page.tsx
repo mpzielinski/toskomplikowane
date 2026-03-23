@@ -21,10 +21,12 @@ export default function HomePage() {
             <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed font-sans">
               Pomagamy małym firmom wykorzystać potencjał sztucznej inteligencji poprzez optymalizację procesów.
             </p>
-            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-3 font-medium font-sans">
-              Rozpocznij transformację
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <a href="#contact">
+              <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-3 font-medium font-sans">
+                Rozpocznij transformację
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
           </div>
         </div>
       </section>
